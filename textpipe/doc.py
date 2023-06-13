@@ -18,10 +18,10 @@ import textacy.text_utils
 from bs4 import BeautifulSoup
 from datasketch import MinHash
 from gensim.models.keyedvectors import KeyedVectors
-from summarizer import Summarizer
 from textpipe.data.emoji import EMOJI_TO_UNICODE_NAME, EMOJI_TO_SENTIMENT
 from textpipe.wrappers import RedisKeyedVectors
 from textpipe.util import getattr_
+from textpipe import summarizer
 
 
 class TextpipeMissingModelException(Exception):
@@ -709,8 +709,7 @@ class Doc:
         if both ratio and word_count are provided, ratio is ignored
         """
         try:
-            model = Summarizer()
-            return model(self._spacy_doc.text, ratio=ratio)
+            return summarizer(self._spacy_doc.text)
         except ValueError:
             return []
 
