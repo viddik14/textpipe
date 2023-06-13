@@ -709,7 +709,7 @@ class Doc:
         if both ratio and word_count are provided, ratio is ignored
         """
         try:
-            return summarizer(self._spacy_doc.text)
+            return summarizer.generate_summary(self._spacy_doc.text)
         except ValueError:
             return []
 
